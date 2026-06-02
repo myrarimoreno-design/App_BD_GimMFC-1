@@ -111,16 +111,16 @@ Public Class pntEstudiante
     Private Sub btnRegistrarEstudiante_Click_1(sender As Object, e As EventArgs) Handles btnRegistrarEstudiante.Click
         ' 1. Validar que todos los campos estén llenos
         If String.IsNullOrWhiteSpace(txtNombreEstudiantes.Text) OrElse
-           String.IsNullOrWhiteSpace(txtDireccion.Text) OrElse
-           String.IsNullOrWhiteSpace(txtContacto.Text) OrElse
-           String.IsNullOrWhiteSpace(txtIdEmpleado.Text) Then
+       String.IsNullOrWhiteSpace(txtDireccion.Text) OrElse
+       String.IsNullOrWhiteSpace(txtContacto.Text) OrElse
+       String.IsNullOrWhiteSpace(txtIdEmpleado.Text) Then
 
             MsgBox("Por favor, complete todos los campos antes de registrar.", MsgBoxStyle.Exclamation, "Aviso")
             Exit Sub
         End If
 
         ' 2. Crear conexión
-        Dim conexion As New SqlConnection("Data Source=DESKTOP-P1KRNOI\SQLEXPRESS;Initial Catalog=Gimnasio;Integrated Security=True")
+        Dim conexion As New SqlConnection("Data Source=DESKTOP-P1KRNOI\SQLEXPRESS;Initial Catalog=GimnasioBD;Integrated Security=True")
 
         Try
             conexion.Open()
@@ -132,22 +132,23 @@ Public Class pntEstudiante
             cmdVerificar.Parameters.AddWithValue("@fechNac", dtpFechaNac.Value)
 
             Dim resultado As Object = cmdVerificar.ExecuteScalar()
-            Dim existe As Integer = 0
-
-            If Not IsDBNull(resultado) Then
-                existe = Convert.ToInt32(resultado)
-            End If
+            Dim existe As Integer = If(IsDBNull(resultado), 0, Convert.ToInt32(resultado))
 
             If existe > 0 Then
                 ' 4. Ya existe un estudiante con ese nombre y fecha de nacimiento
                 MsgBox("El estudiante ya existe en la base de datos.", MsgBoxStyle.Critical, "Duplicado")
             Else
-                ' 5. Insertar nuevo estudiante y recuperar el IdEstudiante generado
-                Dim QueryInsertar As String = "INSERT INTO Estudiante (Nombre_Estudiante, Direccion, FechNac, Contacto, Fecha_Ingreso, IdEmpleado)
-                                           OUTPUT INSERTED.IdEstudiante
-                                           VALUES (@nombre, @direccion, @fechNac, @contacto, @fechaIngreso, @idEmpleado)"
+                ' 5. Obtener el próximo IdEstudiante manualmente
+                Dim QueryMaxId As String = "SELECT ISNULL(MAX(IdEstudiante),0) + 1 FROM Estudiante"
+                Dim cmdMaxId As New SqlClient.SqlCommand(QueryMaxId, conexion)
+                Dim nuevoId As Integer = Convert.ToInt32(cmdMaxId.ExecuteScalar())
+
+                ' 6. Insertar nuevo estudiante con el Id calculado
+                Dim QueryInsertar As String = "INSERT INTO Estudiante (IdEstudiante, Nombre_Estudiante, Direccion, FechNac, Contacto, Fecha_Ingreso, IdEmpleado)
+                                           VALUES (@idEstudiante, @nombre, @direccion, @fechNac, @contacto, @fechaIngreso, @idEmpleado)"
 
                 Dim cmdInsertar As New SqlClient.SqlCommand(QueryInsertar, conexion)
+                cmdInsertar.Parameters.AddWithValue("@idEstudiante", nuevoId)
                 cmdInsertar.Parameters.AddWithValue("@nombre", txtNombreEstudiantes.Text)
                 cmdInsertar.Parameters.AddWithValue("@direccion", txtDireccion.Text)
                 cmdInsertar.Parameters.AddWithValue("@fechNac", dtpFechaNac.Value)
@@ -155,22 +156,22 @@ Public Class pntEstudiante
                 cmdInsertar.Parameters.AddWithValue("@fechaIngreso", dtpFechaIngreso.Value)
                 cmdInsertar.Parameters.AddWithValue("@idEmpleado", Convert.ToInt32(txtIdEmpleado.Text))
 
-                Dim nuevoId As Integer = Convert.ToInt32(cmdInsertar.ExecuteScalar())
+                cmdInsertar.ExecuteNonQuery()
 
-                ' 6. Mensaje de éxito con el ID y el nombre
+                ' 7. Mensaje de éxito con el ID y el nombre
                 MsgBox("Estudiante registrado correctamente." & vbCrLf &
-                       "ID asignado: " & nuevoId & vbCrLf &
-                       "Nombre: " & txtNombreEstudiantes.Text,
-                       MsgBoxStyle.Information, "Éxito")
+                   "ID asignado: " & nuevoId & vbCrLf &
+                   "Nombre: " & txtNombreEstudiantes.Text,
+                   MsgBoxStyle.Information, "Éxito")
             End If
 
         Catch ex As Exception
-            ' 7. Capturar errores
+            ' 8. Capturar errores
             MsgBox("Error al registrar estudiante: " & ex.Message, MsgBoxStyle.Critical, "Error")
         Finally
             conexion.Close()
 
-            ' 8. Limpiar todos los campos siempre
+            ' 9. Limpiar todos los campos siempre
             txtNombreEstudiantes.Clear()
             txtDireccion.Clear()
             txtContacto.Clear()
