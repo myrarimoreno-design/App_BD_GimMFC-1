@@ -81,7 +81,7 @@ Partial Class pntClases
         'dgvEstudiantes
         '
         Me.dgvEstudiantes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvEstudiantes.Location = New System.Drawing.Point(289, 168)
+        Me.dgvEstudiantes.Location = New System.Drawing.Point(295, 156)
         Me.dgvEstudiantes.Margin = New System.Windows.Forms.Padding(2)
         Me.dgvEstudiantes.Name = "dgvEstudiantes"
         Me.dgvEstudiantes.RowHeadersWidth = 72
