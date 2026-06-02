@@ -38,19 +38,19 @@ Partial Class pntClases
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Times New Roman", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(238, 72)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.Label4.Location = New System.Drawing.Point(121, 304)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(134, 48)
+        Me.Label4.Size = New System.Drawing.Size(77, 26)
         Me.Label4.TabIndex = 4
         Me.Label4.Text = "Clases"
         '
         'PictureBox2
         '
         Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(114, 58)
+        Me.PictureBox2.Location = New System.Drawing.Point(58, 287)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(2)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(98, 80)
+        Me.PictureBox2.Size = New System.Drawing.Size(53, 43)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox2.TabIndex = 5
         Me.PictureBox2.TabStop = False
@@ -58,9 +58,10 @@ Partial Class pntClases
         'cbClases
         '
         Me.cbClases.FormattingEnabled = True
-        Me.cbClases.Location = New System.Drawing.Point(231, 176)
+        Me.cbClases.Location = New System.Drawing.Point(126, 95)
+        Me.cbClases.Margin = New System.Windows.Forms.Padding(2)
         Me.cbClases.Name = "cbClases"
-        Me.cbClases.Size = New System.Drawing.Size(222, 32)
+        Me.cbClases.Size = New System.Drawing.Size(123, 21)
         Me.cbClases.TabIndex = 7
         '
         'btnBuscarClases
@@ -68,9 +69,10 @@ Partial Class pntClases
         Me.btnBuscarClases.Font = New System.Drawing.Font("Mongolian Baiti", 8.142858!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBuscarClases.Image = CType(resources.GetObject("btnBuscarClases.Image"), System.Drawing.Image)
         Me.btnBuscarClases.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnBuscarClases.Location = New System.Drawing.Point(690, 94)
+        Me.btnBuscarClases.Location = New System.Drawing.Point(379, 56)
+        Me.btnBuscarClases.Margin = New System.Windows.Forms.Padding(2)
         Me.btnBuscarClases.Name = "btnBuscarClases"
-        Me.btnBuscarClases.Size = New System.Drawing.Size(129, 56)
+        Me.btnBuscarClases.Size = New System.Drawing.Size(70, 30)
         Me.btnBuscarClases.TabIndex = 22
         Me.btnBuscarClases.Text = "Buscar"
         Me.btnBuscarClases.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -79,11 +81,12 @@ Partial Class pntClases
         'dgvEstudiantes
         '
         Me.dgvEstudiantes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvEstudiantes.Location = New System.Drawing.Point(162, 284)
+        Me.dgvEstudiantes.Location = New System.Drawing.Point(289, 168)
+        Me.dgvEstudiantes.Margin = New System.Windows.Forms.Padding(2)
         Me.dgvEstudiantes.Name = "dgvEstudiantes"
         Me.dgvEstudiantes.RowHeadersWidth = 72
         Me.dgvEstudiantes.RowTemplate.Height = 31
-        Me.dgvEstudiantes.Size = New System.Drawing.Size(851, 426)
+        Me.dgvEstudiantes.Size = New System.Drawing.Size(329, 142)
         Me.dgvEstudiantes.TabIndex = 23
         '
         'btnRegresarComp
@@ -91,9 +94,10 @@ Partial Class pntClases
         Me.btnRegresarComp.Font = New System.Drawing.Font("Mongolian Baiti", 8.142858!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRegresarComp.Image = CType(resources.GetObject("btnRegresarComp.Image"), System.Drawing.Image)
         Me.btnRegresarComp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnRegresarComp.Location = New System.Drawing.Point(690, 168)
+        Me.btnRegresarComp.Location = New System.Drawing.Point(379, 90)
+        Me.btnRegresarComp.Margin = New System.Windows.Forms.Padding(2)
         Me.btnRegresarComp.Name = "btnRegresarComp"
-        Me.btnRegresarComp.Size = New System.Drawing.Size(130, 56)
+        Me.btnRegresarComp.Size = New System.Drawing.Size(71, 30)
         Me.btnRegresarComp.TabIndex = 24
         Me.btnRegresarComp.Text = "Regresar"
         Me.btnRegresarComp.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -101,15 +105,16 @@ Partial Class pntClases
         '
         'pntClases
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(11.0!, 24.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1274, 773)
+        Me.ClientSize = New System.Drawing.Size(695, 406)
         Me.Controls.Add(Me.btnRegresarComp)
         Me.Controls.Add(Me.dgvEstudiantes)
         Me.Controls.Add(Me.btnBuscarClases)
         Me.Controls.Add(Me.cbClases)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.Label4)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "pntClases"
         Me.Text = "pntClases"
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
